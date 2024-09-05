@@ -28,7 +28,6 @@ with col3:
     if st.button('Data Analysis'):
         st.session_state['page'] = 'Data Analysis'
 
-# Display content based on the selected navigation button
 if st.session_state['page'] == 'Home':
     st.write("Welcome to the Student Exam Performance EDA app.")
     st.write("Use the navigation menu above to explore the data and perform analysis.")
@@ -40,16 +39,16 @@ if st.session_state['page'] == 'Home':
 elif st.session_state['page'] == 'Data Overview':
     uploaded_file = st.file_uploader("Upload CSV file here", type="csv")   
     if uploaded_file is not None:
-        # Load the data
+        
         df = pd.read_csv(uploaded_file, delimiter=';')
         st.subheader('Display the first few rows of the dataset')
         st.write(df.head())
         
-        # Show dataset information (e.g., data types, missing values)
+    
         st.subheader('Missing Values')
         st.write(df.isnull().sum())
         
-        # Generate summary statistics for the dataset
+      
         st.subheader('Summary Statistics')
         st.write(df.describe())
 
@@ -58,10 +57,9 @@ elif st.session_state['page'] == 'Data Analysis':
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file, delimiter=';')
 
-        # Numeric columns for correlation and plotting
         num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
 
-        # Dropdown for plot type selection
+    
         plot_type = st.selectbox("Select the type of plot to display", 
                                  options=["Heatmap", "Box and Whisker Plots", "Scatter Plots", "Bar Plot", "All"])
 
